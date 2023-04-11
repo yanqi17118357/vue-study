@@ -1,11 +1,12 @@
 <template>
-    <div>Picked: {{ picked }}</div>
+    <div>Selected: {{ selected }}</div>
 
-    <input type="radio" id="one" value="One" v-model="picked" />
-    <label for="one">One</label>
-
-    <input type="radio" id="two" value="Two" v-model="picked" />
-    <label for="two">Two</label>
+    <select v-model="selected">
+        <option disabled value="">Please select one</option>
+        <option>A</option>
+        <option>B</option>
+        <option>C</option>
+    </select>
 
 </template>
 
@@ -13,7 +14,7 @@
 export default {
     data() {
         return {
-            picked: ''
+            selected: ''
         }
     }
 }
