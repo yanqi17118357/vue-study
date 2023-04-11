@@ -1,12 +1,12 @@
 <template>
-    <div>Selected: {{ selected }}</div>
-
+<!--    v-model作为selected的数据源-->
     <select v-model="selected">
-        <option disabled value="">Please select one</option>
-        <option>A</option>
-        <option>B</option>
-        <option>C</option>
+        <option v-for="option in options" :value="option.value">
+            {{ option.text }}
+        </option>
     </select>
+
+    <div>Selected: {{ selected }}</div>
 
 </template>
 
@@ -14,7 +14,12 @@
 export default {
     data() {
         return {
-            selected: ''
+            selected: 'A',
+            options: [
+                { text: 'One', value: 'A' },
+                { text: 'Two', value: 'B' },
+                { text: 'Three', value: 'C' }
+            ]
         }
     }
 }
