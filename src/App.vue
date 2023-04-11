@@ -1,9 +1,9 @@
 <template>
-    <input
-        :value="text"
-        @input="event => text = event.target.value">
-
-    <input v-model="text">
+    <p>Message is: {{ message }}</p>
+    <input v-model="message" placeholder="edit me"/>
+    <p>Multiline message is:</p>
+    <p style="white-space: pre-line;">{{ message }}</p>
+    <textarea v-model="message" placeholder="add multiple lines"></textarea>
 
 </template>
 
@@ -11,19 +11,10 @@
 export default {
     data() {
         return {
-            name: 'Vue.js',
-            text: 'hello'
+            message: ' '
         }
     },
-    methods: {
-        warn(message, event) {
-            // 这里可以访问 DOM 原生事件
-            if (event) {
-                event.preventDefault()
-            }
-            alert(message)
-        }
-    }
+    methods: {}
 }
 </script>
 
