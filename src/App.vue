@@ -3,8 +3,8 @@
     <input
         type="checkbox"
         v-model="toggle"
-        true-value="yes"
-        false-value="no" />
+        :true-value="dynamicTrueValue"
+        :false-value="dynamicFalseValue" />
 
 </template>
 
@@ -12,7 +12,9 @@
 export default {
     data() {
         return {
-            toggle: ''
+            toggle: '',
+            dynamicTrueValue: "正确的",
+            dynamicFalseValue: "错误的"
         }
     }
 }
