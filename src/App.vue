@@ -1,12 +1,14 @@
 <template>
-<!--    v-model作为selected的数据源-->
-    <select v-model="selected">
-        <option v-for="option in options" :value="option.value">
-            {{ option.text }}
-        </option>
-    </select>
+    <!-- `picked` 在被选择时是字符串 "a" -->
+    <input type="radio" v-model="picked" value="a" />
 
-    <div>Selected: {{ selected }}</div>
+    <!-- `toggle` 只会为 true 或 false -->
+    <input type="checkbox" v-model="toggle" />
+
+    <!-- `selected` 在第一项被选中时为字符串 "abc" -->
+    <select v-model="selected">
+        <option value="abc">ABC</option>
+    </select>
 
 </template>
 
@@ -14,12 +16,9 @@
 export default {
     data() {
         return {
-            selected: 'A',
-            options: [
-                { text: 'One', value: 'A' },
-                { text: 'Two', value: 'B' },
-                { text: 'Three', value: 'C' }
-            ]
+            picked: '',
+            toggle: '',
+            selected: ''
         }
     }
 }
