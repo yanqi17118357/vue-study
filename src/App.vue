@@ -1,6 +1,7 @@
 <template>
     <div>
-        <input v-model="question" />
+        <p>计数器：{{ count }}</p>
+        <button @click="increment">增加</button>
     </div>
 
 </template>
@@ -9,22 +10,21 @@
 export default {
     data() {
         return {
-            question: ''
+            count: 0
         }
     },
-    // ...
-    watch: {
-        question: {
-            handler(newQuestion) {
-                // 在组件实例创建时会立即调用
-                alert("hhh")
-            },
-            // 强制立即执行回调
-            immediate: true
+    // mounted 钩子可以用来在组件完成初始渲染并创建 DOM 节点后运行代码
+    mounted() {
+        this.$watch('count', (newVal, oldVal) => {
+            console.log(`计数器的值从 ${oldVal} 变为了 ${newVal}`);
+        });
+    },
+    methods: {
+        increment() {
+            this.count++;
         }
     }
-    // ...
-}
+};
 </script>
 
 <style scoped>
