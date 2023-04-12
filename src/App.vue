@@ -1,17 +1,9 @@
 <template>
-    <select v-model="selected">
-        <!-- 内联对象字面量 -->
-<!--        selected 会被设为该对象字面量值 { number: 123 }-->
-        <option :value="{ number: 123 }">123</option>
-    </select>
-    <!-- 在 "change" 事件后同步更新而不是 "input" -->
-    <input v-model.lazy="msg" />
-
-<!--    输入自动转换为数字，如果该值无法被 parseFloat() 处理，那么将返回原始值。-->
-    <input v-model.number="age" />
-
-<!--    默认自动去除用户输入内容中两端的空格-->
-    <input v-model.trim="msg" />
+    <p>
+        Ask a yes/no question:
+        <input v-model="question" />
+    </p>
+    <p>{{ answer }}</p>
 
 </template>
 
@@ -19,9 +11,34 @@
 export default {
     data() {
         return {
-            selected: '',
-            msg: '',
-            age: ''
+            question: '',
+            hh: {name: 'Tom', city: 'Beijing'},
+            answer: 'Questions usually contain a question mark. ;-)'
+        }
+    },
+    watch: {
+        // 每当 question 改变时，这个函数就会执行
+        question(newQuestion, oldQuestion) {
+            if (newQuestion.includes('?')) {
+                this.getAnswer()
+            }
+        },
+        // 也支持下面这种，可以用.简单的分割对象的键，如果函数不需要参数可以省去function(...)
+        'hh.name': function(newQuestion, oldQuestion) {
+            if (newQuestion.includes('?')) {
+                this.getAnswer()
+            }
+        }
+    },
+    methods: {
+        async getAnswer() {
+            this.answer = 'Thinking...'
+            try {
+                const res = await fetch('https://yesno.wtf/api')
+                this.answer = (await res.json()).answer
+            } catch (error) {
+                this.answer = 'Error! Could not reach the API. ' + error
+            }
         }
     }
 }
