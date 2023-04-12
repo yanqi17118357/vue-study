@@ -1,9 +1,9 @@
 <template>
-    <p>
-        Ask a yes/no question:
-        <input v-model="question" />
-    </p>
-    <p>{{ answer }}</p>
+    <div>
+        <h2>{{ fullName }}</h2>
+        <p>名字：<input v-model="firstName"></p>
+        <p>姓氏：<input v-model="lastName"></p>
+    </div>
 
 </template>
 
@@ -11,37 +11,26 @@
 export default {
     data() {
         return {
-            question: '',
-            hh: {name: 'Tom', city: 'Beijing'},
-            answer: 'Questions usually contain a question mark. ;-)'
+            firstName: '',
+            lastName: '',
+            fullName: ''
         }
     },
     watch: {
-        // 每当 question 改变时，这个函数就会执行
-        question(newQuestion, oldQuestion) {
-            if (newQuestion.includes('?')) {
-                this.getAnswer()
-            }
+        firstName: {
+            handler(newVal, oldVal) {
+                this.fullName = newVal + ' ' + this.lastName;
+            },
+            deep: true
         },
-        // 也支持下面这种，可以用.简单的分割对象的键，如果函数不需要参数可以省去function(...)
-        'hh.name': function(newQuestion, oldQuestion) {
-            if (newQuestion.includes('?')) {
-                this.getAnswer()
-            }
-        }
-    },
-    methods: {
-        async getAnswer() {
-            this.answer = 'Thinking...'
-            try {
-                const res = await fetch('https://yesno.wtf/api')
-                this.answer = (await res.json()).answer
-            } catch (error) {
-                this.answer = 'Error! Could not reach the API. ' + error
-            }
+        lastName: {
+            handler(newVal, oldVal) {
+                this.fullName = this.firstName + ' ' + newVal;
+            },
+            deep: true
         }
     }
-}
+};
 </script>
 
 <style scoped>
