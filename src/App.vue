@@ -1,8 +1,6 @@
 <template>
     <div>
-        <h2>{{ fullName }}</h2>
-        <p>名字：<input v-model="firstName"></p>
-        <p>姓氏：<input v-model="lastName"></p>
+        <input v-model="question" />
     </div>
 
 </template>
@@ -11,26 +9,22 @@
 export default {
     data() {
         return {
-            firstName: '',
-            lastName: '',
-            fullName: ''
+            question: ''
         }
     },
+    // ...
     watch: {
-        firstName: {
-            handler(newVal, oldVal) {
-                this.fullName = newVal + ' ' + this.lastName;
+        question: {
+            handler(newQuestion) {
+                // 在组件实例创建时会立即调用
+                alert("hhh")
             },
-            deep: true
-        },
-        lastName: {
-            handler(newVal, oldVal) {
-                this.fullName = this.firstName + ' ' + newVal;
-            },
-            deep: true
+            // 强制立即执行回调
+            immediate: true
         }
     }
-};
+    // ...
+}
 </script>
 
 <style scoped>
