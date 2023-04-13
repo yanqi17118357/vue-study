@@ -1,16 +1,25 @@
 <script>
 export default {
-    // 在Vue组件生命周期的 mounted 钩子函数里，
-    // 我们可以确保模板引用所对应的DOM元素已经被创建，可以安全地访问它们了。
+    data() {
+        return {
+            list: [
+                "1",
+                "2"
+            ]
+        }
+    },
     mounted() {
-        this.$refs.input.focus()
+        console.log(this.$refs.items)
     }
 }
 </script>
 
 <template>
-<!--    vue在组件挂载后才能访问模板引用-->
-    <input ref="input" />
+    <ul>
+        <li v-for="item in list" ref="items">
+            {{ item }}
+        </li>
+    </ul>
 </template>
 
 <style scoped>
