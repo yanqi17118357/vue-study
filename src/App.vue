@@ -1,47 +1,47 @@
 <!--
-现在我们将元素的 attribute / property 响应式地绑定到状态上。
-这个 :title 语法是 v-bind:title 的简写。
+Hover your mouse over me for a few seconds to see my dynamically bound title!
+
+This should be red... but click me to toggle it.
+
+This should be green, and should toggle between green and blue on click.
 -->
 
 <script>
 export default {
     data() {
         return {
-            message: 'Hello World!',
+            data: "hello, world",
             isRed: true,
             color: 'green'
         }
     },
     methods: {
-        toggleRed() {
-            this.isRed = !this.isRed
+        redTrans() {
+            this.isRed = !this.isRed;
         },
-        toggleColor() {
-            this.color = this.color === 'green' ? 'blue' : 'green'
+        transColor() {
+          this.color = (this.color === "green") ? 'blue' : 'green';
         }
     }
+
 }
 </script>
 
 <template>
     <p>
-    <span :title="message">
-      Hover your mouse over me for a few seconds to see my dynamically bound title!
-    </span>
+        <span :title="data">
+            Hover your mouse over me for a few seconds to see my dynamically bound title!
+        </span>
     </p>
 
-    <!--
-    除了普通字符串之外，
-    class 绑定还特别支持了对象和数组
-    -->
-    <p :class="{ red: isRed }" @click="toggleRed">
+    <p :class="{ red: isRed }" @click="redTrans">
         This should be red... but click me to toggle it.
     </p>
 
-    <!-- 样式绑定也支持对象和数组 -->
-    <p :style="{ color }" @click="toggleColor">
+    <p :style="{ color }" @click="transColor">
         This should be green, and should toggle between green and blue on click.
     </p>
+
 </template>
 
 <style>
