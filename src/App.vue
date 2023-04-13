@@ -9,6 +9,7 @@ export default {
         }
     },
     mounted() {
+        // 输出所有对应引用的 DOM 元素
         console.log(this.$refs.items)
     }
 }
