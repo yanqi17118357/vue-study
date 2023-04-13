@@ -1,51 +1,26 @@
-<!--
-Hover your mouse over me for a few seconds to see my dynamically bound title!
-
-This should be red... but click me to toggle it.
-
-This should be green, and should toggle between green and blue on click.
--->
 
 <script>
 export default {
     data() {
         return {
-            data: "hello, world",
-            isRed: true,
-            color: 'green'
-        }
-    },
-    methods: {
-        redTrans() {
-            this.isRed = !this.isRed;
-        },
-        transColor() {
-          this.color = (this.color === "green") ? 'blue' : 'green';
+            show: true,
+            list: [1, 2, 3]
         }
     }
-
 }
 </script>
 
 <template>
-    <p>
-        <span :title="data">
-            Hover your mouse over me for a few seconds to see my dynamically bound title!
-        </span>
-    </p>
+    <button @click="show = !show">转换列表显示</button>
+    <button @click="list.push(list.length+1)">插入一条数据</button>
+    <button @click="list.pop()">删除一条数据</button>
+    <button @click="list.reverse()">反转列表</button>
 
-    <p :class="{ red: isRed }" @click="redTrans">
-        This should be red... but click me to toggle it.
-    </p>
-
-    <p :style="{ color }" @click="transColor">
-        This should be green, and should toggle between green and blue on click.
-    </p>
-
+    <ul v-if="show && list.length">
+        <li v-for="item in list">
+            {{ item }}
+        </li>
+    </ul>
+    <p v-else-if="list.length">存在列表，但是隐藏了</p>
+    <p v-else>列表没有数据</p>
 </template>
-
-<style>
-.red {
-    color: red;
-}
-</style>
