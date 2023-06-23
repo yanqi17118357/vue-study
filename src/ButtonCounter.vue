@@ -1,3 +1,7 @@
+<template>
+    <button @click="count++">You clicked me {{ count }} times.</button>
+</template>
+
 <script>
 export default {
     data() {
@@ -7,10 +11,6 @@ export default {
     }
 }
 </script>
-
-<template>
-    <button @click="count++">You clicked me {{ count }} times.</button>
-</template>
 
 <style scoped>
 </style>
